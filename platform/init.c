@@ -165,7 +165,11 @@ __WEAK uint32_t platform_get_max_periph()
 is enabled. And this is expected to be called only for MDM Targets */
 __WEAK uint32_t read_der_message_length(unsigned char* input, unsigned sz)
 {
+#ifdef LK_2ND
+	return 0;
+#else
 	return SIGNATURE_SIZE;
+#endif
 }
 
 /* Check if glink is supported or not */

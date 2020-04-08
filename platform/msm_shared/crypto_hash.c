@@ -26,6 +26,7 @@
  * IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#ifndef LK_2ND
 #include <string.h>
 #include <sha.h>
 #include <debug.h>
@@ -405,3 +406,4 @@ calc_num_bytes_to_send(void *ctx_ptr, unsigned int buff_size, bool last)
 	}
 	return bytes_to_write;
 }
+#endif

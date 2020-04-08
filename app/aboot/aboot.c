@@ -52,7 +52,9 @@
 #include <crypto_hash.h>
 #include <malloc.h>
 #include <boot_stats.h>
+#ifndef LK_2ND
 #include <sha.h>
+#endif
 #include <platform/iomap.h>
 #include <boot_device.h>
 #include <boot_verifier.h>
@@ -1194,6 +1196,7 @@ int check_ddr_addr_range_bound(uintptr_t start, uint32_t size)
 
 BUF_DMA_ALIGN(buf, BOOT_IMG_MAX_PAGE_SIZE); //Equal to max-supported pagesize
 
+#ifndef LK_2ND
 static void verify_signed_bootimg(uint32_t bootimg_addr, uint32_t bootimg_size)
 {
 	int ret;
@@ -1308,6 +1311,7 @@ static void verify_signed_bootimg(uint32_t bootimg_addr, uint32_t bootimg_size)
 	}
 #endif
 }
+#endif
 
 static bool check_format_bit()
 {
@@ -1585,7 +1589,9 @@ int boot_linux_from_mmc(void)
 			return -1;
 		}
 
+#ifndef LK_2ND
 		verify_signed_bootimg((uint32_t)image_addr, imagesize_actual);
+#endif
 		/* The purpose of our test is done here */
 		if(is_test_mode_enabled() && auth_kernel_img)
 			return 0;
@@ -2005,7 +2011,9 @@ int boot_linux_from_flash(void)
 			return -1;
 		}
 
+#ifndef LK_2ND
 		verify_signed_bootimg((uint32_t)image_addr, imagesize_actual);
+#endif
 	}
 	offset = page_size;
 	if(hdr->second_size != 0) {
@@ -2747,7 +2755,9 @@ void cmd_boot(const char *arg, void *data, unsigned sz)
 		/* Pass size excluding signature size, otherwise we would try to
 		 * access signature beyond its length
 		 */
+#ifndef LK_2ND
 		verify_signed_bootimg((uint32_t)data, (image_actual - sig_actual));
+#endif
 	}
 #ifdef MDTP_SUPPORT
 	else
@@ -4684,6 +4694,7 @@ uint32_t get_page_size()
  *
  * @return int - 0 on success, negative value on failure.
  */
+#ifndef LK_2ND
 static int aboot_save_boot_hash_mmc(uint32_t image_addr, uint32_t image_size)
 {
 	unsigned int digest[8];
@@ -4701,6 +4712,7 @@ static int aboot_save_boot_hash_mmc(uint32_t image_addr, uint32_t image_size)
 
 	return 0;
 }
+#endif
 
 
 APP_START(aboot)

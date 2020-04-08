@@ -33,7 +33,9 @@
 #include <bits.h>
 #include <arch/ops.h>
 #include <rand.h>
+#ifndef LK_2ND
 #include <image_verify.h>
+#endif
 #include <dload_util.h>
 #include <platform/iomap.h>
 #include <board.h>
@@ -802,6 +804,7 @@ uint8_t get_tamper_fuse_cmd()
 	}
 }
 
+#ifndef LK_2ND
 /*
  * struct qseecom_save_partition_hash_req
  * @partition_id - partition id.
@@ -852,6 +855,7 @@ void save_kernel_hash_cmd(void *digest)
 			dprintf(CRITICAL, "Failed to Save kernel hash\n");
 	}
 }
+#endif
 
 int mdtp_cipher_dip_cmd(uint8_t *in_buf, uint32_t in_buf_size, uint8_t *out_buf,
                           uint32_t out_buf_size, uint32_t direction)

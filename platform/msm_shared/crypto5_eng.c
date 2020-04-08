@@ -26,6 +26,7 @@
  * IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#ifndef LK_2ND
 #include <reg.h>
 #include <debug.h>
 #include <endian.h>
@@ -610,3 +611,4 @@ uint32_t crypto5_get_max_auth_blk_size(struct crypto_dev *dev)
 {
 	return (dev->bam.max_desc_len * (dev->bam.pipe[CRYPTO_WRITE_PIPE_INDEX].fifo.size - 2));
 }
+#endif

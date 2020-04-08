@@ -29,7 +29,9 @@
 #include <debug.h>
 #include <reg.h>
 #include <stdlib.h>
+#ifndef LK_2ND
 #include <openssl/evp.h>
+#endif
 #include <dev/fbcon.h>
 #include <kernel/thread.h>
 #include <display_menu.h>

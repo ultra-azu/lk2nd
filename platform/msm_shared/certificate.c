@@ -26,6 +26,7 @@
  * IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
  */
+#ifndef LK_2ND
 #include <certificate.h>
 
 const char certBuffer[CERTIFICATE_SIZE] = {
@@ -166,3 +167,4 @@ const char certBuffer[CERTIFICATE_SIZE] = {
 	0x4a, 0x0e, 0xe2,
 	0x79, 0x9c, 0xd3, 0x83
 };
+#endif

@@ -29,7 +29,7 @@
 
 #ifndef __BOOT_VERIFIER_H
 #define __BOOT_VERIFIER_H
-
+#ifndef LK_2ND
 #include <asn1.h>
 #include <rsa.h>
 
@@ -129,6 +129,7 @@ typedef struct keystore_st
 DECLARE_STACK_OF(KEYSTORE)
 DECLARE_ASN1_SET_OF(KEYSTORE)
 DECLARE_ASN1_FUNCTIONS(KEYSTORE)
+#endif
 
 enum boot_state
 {
@@ -178,8 +179,10 @@ bool send_rot_command(uint32_t is_unlocked);
 /* function to set the os version and patch level. */
 void set_os_version(unsigned char* img_addr);
 unsigned char* get_boot_fingerprint(unsigned int* buf_size);
+#ifndef LK_2ND
 bool boot_verify_compare_sha256(unsigned char *image_ptr,
 		unsigned int image_size, unsigned char *signature_ptr, RSA *rsa);
 KEYSTORE *boot_gerity_get_oem_keystore();
+#endif
 uint32_t read_der_message_length(unsigned char* input, unsigned sz);
 #endif

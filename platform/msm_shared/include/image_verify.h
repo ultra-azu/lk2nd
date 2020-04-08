@@ -26,6 +26,7 @@
  */
 #ifndef __IMAGE_VERIFY_H
 #define __IMAGE_VERIFY_H
+#ifndef LK_2ND
 
 #include <x509.h>
 
@@ -49,4 +50,5 @@ void image_find_digest(unsigned char *image_ptr, unsigned int image_size,
 		unsigned hash_type, unsigned char *digest);
 void save_kernel_hash_cmd(void *digest);
 void save_kernel_hash(unsigned char *digest, unsigned hash_type);
+#endif
 #endif

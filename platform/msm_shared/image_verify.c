@@ -24,6 +24,7 @@
  * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  * SUCH DAMAGE.
  */
+#ifndef LK_2ND
 #include <x509.h>
 #include <err.h>
 #include <certificate.h>
@@ -229,3 +230,4 @@ image_verify(unsigned char *image_ptr,
 	ERR_remove_thread_state(NULL);
 	return auth;
 }
+#endif
