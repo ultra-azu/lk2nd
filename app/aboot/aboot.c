@@ -1047,7 +1047,7 @@ unsigned char* generate_mac_address()
 
 	return mac;
 }
-
+extern void lk2nd_clear_pstore();
 typedef void entry_func_ptr(unsigned, unsigned, unsigned*);
 void boot_linux(void *kernel, unsigned *tags,
 		const char *cmdline, unsigned machtype,
@@ -1066,6 +1066,8 @@ void boot_linux(void *kernel, unsigned *tags,
 	ramdisk = (void *)PA((addr_t)ramdisk);
 
 	final_cmdline = update_cmdline((const char*)cmdline);
+
+	lk2nd_clear_pstore();
 
 #if DEVICE_TREE
 	dprintf(INFO, "Updating device tree: start\n");
