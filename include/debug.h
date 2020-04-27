@@ -59,6 +59,7 @@ int _dvprintf(const char *fmt, va_list ap);
 #define dvprintf(level, x...) do { if ((level) <= DEBUGLEVEL) { _dvprintf(x); } } while (0)
 
 /* lk_log */
+void lk_log_set_ramoops(void*, unsigned);
 char* lk_log_getbuf(void);
 unsigned lk_log_getsize(void);
 

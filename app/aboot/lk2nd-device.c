@@ -277,6 +277,7 @@ void lk2nd_clear_pstore()
 {
 	if (lk2nd_dev.pstore) {
 		memset(lk2nd_dev.pstore, '\n', lk2nd_dev.pstore_size);
+		lk_log_set_ramoops(lk2nd_dev.pstore, lk2nd_dev.pstore_size);
 	}
 }
 

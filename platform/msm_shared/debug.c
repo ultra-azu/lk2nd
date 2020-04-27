@@ -35,6 +35,7 @@
 #include <printf.h>
 #include <arch/arm/dcc.h>
 #include <dev/fbcon.h>
+#include <string.h>
 #include <dev/uart.h>
 #include <platform/timer.h>
 #include <platform.h>
@@ -76,6 +77,7 @@ struct lk_log {
 		unsigned idx;
 	} header;
 	char data[LK_LOG_BUF_SIZE];
+	char *ramoops;
 };
 
 static struct lk_log log = {
@@ -85,18 +87,33 @@ static struct lk_log log = {
 		.size_written = 0,
 		.idx = 0,
 	},
+	.ramoops = 0,
 	.data = {0}
 };
+
+void lk_log_set_ramoops(void *mem, unsigned size) {
+	unsigned copy_len = log.header.size_written > log.header.idx ?
+		LK_LOG_BUF_SIZE : log.header.idx;
+	log.ramoops = mem;
+	log.header.max_size = size;
+	memcpy(log.ramoops, log.data, copy_len);
+}
 
 static void log_putc(char c)
 {
 	if(!c) return;
-	log.data[log.header.idx++] = c;
+	if (log.ramoops)
+		log.ramoops[log.header.idx++] = c;
+	else
+		log.data[log.header.idx++] = c;
 	log.header.size_written++;
 	if (unlikely(log.header.idx >= log.header.max_size))
 		log.header.idx = 0;
 }
 char* lk_log_getbuf(void) {
+    if (log.ramoops) {
+	    return log.ramoops;
+    }
     return log.data;
 }
 unsigned lk_log_getsize(void) {
