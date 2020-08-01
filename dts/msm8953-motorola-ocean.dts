@@ -1,0 +1,15 @@
+// SPDX-License-Identifier: GPL-2.0-only
+
+/dts-v1/;
+
+/include/ "msm8953.dtsi"
+
+/ {
+	// This is used by the bootloader to find the correct DTB
+	qcom,msm-id = <0x15d 0x00>;
+	qcom,board-id = <0x141 0xc100>;
+	qcom,msm-name = "SDM632";
+
+	model = "Qualcomm Technologies, Inc. SDM632 + PMI632 MTP S3";
+	compatible = "motorola,ocean", "qcom,msm8953", "lk2nd,device";
+};
