@@ -10,6 +10,6 @@
 	qcom,board-id = <0x141 0xc100>;
 	qcom,msm-name = "SDM632";
 
-	model = "Qualcomm Technologies, Inc. SDM632 + PMI632 MTP S3";
+	model = "Motorola Moto G7 Power";
 	compatible = "motorola,ocean", "qcom,msm8953", "lk2nd,device";
 };
