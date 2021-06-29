@@ -17,8 +17,6 @@ DEBUG := 2
 DEFINES += LK_LOG_BUF_SIZE=16384
 DEFINES += DISABLE_CRYPTO=1
 
-# Avoid writing device info
-DEFINES += SAFE_MODE=1
 # Display as unlocked by default
 DEFINES += DEFAULT_UNLOCK=1
 
