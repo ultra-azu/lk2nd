@@ -1,0 +1,13 @@
+image: debian:bullseye
+
+stages:
+  - build
+
+build-job:
+  stage: build
+  before_script:      
+      - nproc && grep Mem /proc/meminfo && df -hT .
+      - apt-get update -qq && apt-get install -yqq gcc-arm-none-eabi device-tree-compiler libfdt-dev make python3 > /dev/null
+
+  script:
+    - make -j$(nproc) TOOLCHAIN_PREFIX=arm-none-eabi- msm8953-secondary
